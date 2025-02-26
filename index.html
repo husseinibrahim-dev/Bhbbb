@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Phone Input with Country Code</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        .phone-container {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        select, input {
+            padding: 8px;
+            font-size: 16px;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="phone-container">
+        <select id="countryCode">
+            <!-- Country codes will be populated here -->
+        </select>
+        <input type="text" id="phoneInput" placeholder="Enter phone number" />
+    </div>
+
+    <script>
+        // Country code list
+        const countryCodes = [
+            { code: "+1", country: "USA" },
+            { code: "+44", country: "UK" },
+            { code: "+91", country: "India" },
+            { code: "+61", country: "Australia" },
+            { code: "+81", country: "Japan" },
+            { code: "+33", country: "France" },
+            { code: "+49", country: "Germany" }
+        ];
+
+        const countryCodeSelect = document.getElementById("countryCode");
+        const phoneInput = document.getElementById("phoneInput");
+
+        // Populate dropdown
+        countryCodes.forEach(({ code, country }) => {
+            const option = document.createElement("option");
+            option.value = code;
+            option.textContent = `${country} (${code})`;
+            countryCodeSelect.appendChild(option);
+        });
+
+        // Insert selected country code into input
+        countryCodeSelect.addEventListener("change", function () {
+            phoneInput.value = this.value + " ";
+            phoneInput.focus(); // Auto-focus to type number
+        });
+
+        // Set default country code
+        phoneInput.value = countryCodeSelect.value + " ";
+    </script>
+
+</body>
+</html>
